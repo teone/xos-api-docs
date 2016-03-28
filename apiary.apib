@@ -72,6 +72,9 @@ Resource related to the CORD Subscribers.
 
 ### Subscriber features uplink_speed [/api/tenant/cord/subscriber/{subscriber_id}/features/uplink_speed]
 
++ Parameters
+    + subscriber_id (number) - ID of the Subscriber in the form of an integer
+
 #### Read Subscriber uplink_speed [GET]
 
 + Response 200 (application/json)
@@ -81,6 +84,8 @@ Resource related to the CORD Subscribers.
         }
 
 #### Update Subscriber uplink_speed [PUT]
+
+This request will set the uplink_speed to a new value for the designated subscriber
 
 + Request 200 (application/json)
 
