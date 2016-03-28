@@ -80,7 +80,7 @@ Resource related to the CORD Subscribers.
             "uplink_speed": 1000000000
         }
 
-#### Update Subscriber uplink_speed [POST]
+#### Update Subscriber uplink_speed [PUT]
 
 + Request 200 (application/json)
 
