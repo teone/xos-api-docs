@@ -96,6 +96,3 @@ Resource related to the CORD Subscribers.
 ### Delete a Subscriber [DELETE]
 
 + Response 204
- 
- 
-# test.md

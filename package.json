@@ -1,0 +1,23 @@
+{
+  "name": "xos-api-docs",
+  "version": "1.0.0",
+  "description": "Api documentation for XOS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teone/xos-api-docs.git"
+  },
+  "author": "Matteo Scandolo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/teone/xos-api-docs/issues"
+  },
+  "homepage": "https://github.com/teone/xos-api-docs#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0"
+  }
+}
