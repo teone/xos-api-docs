@@ -17,36 +17,14 @@ Resource related to the CORD Subscribers.
                 "humanReadableName": "cordSubscriber-1", 
                 "id": 1, 
                 "service_specific_id": "123", 
-                "vlan_id": "432", 
-                "s_tag": "222", 
-                "c_tag": "432", 
-                "vcpe_id": 4, 
-                "instance": 1, 
-                "instance_name": "mysite_vcpe", 
-                "image": 1, 
-                "image_name": "trusty-server-multi-nic", 
-                "firewall_enable": false, 
-                "firewall_rules": "accept all anywhere anywhere", 
-                "url_filter_enable": false, 
-                "url_filter_rules": "allow all", 
-                "url_filter_level": "R", 
-                "bbs_account": null, 
-                "ssh_command": null, 
-                "vcpe_synced": false, 
-                "cdn_enable": false, 
-                "vbng_id": 5, 
-                "routeable_subnet": "", 
-                "nat_ip": null, 
-                "lan_ip": null, 
-                "wan_ip": null, 
-                "private_ip": null, 
-                "wan_mac": null, 
-                "wan_container_ip": null, 
-                "uplink_speed": 1000000000, 
-                "downlink_speed": 1000000000, 
-                "status": "enabled", 
-                "enable_uverse": true
-            } 
+                "features": {
+                    "cdn": false, 
+                    "uplink_speed": 1000000000, 
+                    "downlink_speed": 1000000000, 
+                    "uverse": true, 
+                    "status": "enabled"
+                }
+            }
         ]
 
 ## Subscriber Detail [/api/tenant/cord/subscriber/{subscriber_id}]
@@ -62,37 +40,56 @@ Resource related to the CORD Subscribers.
             "humanReadableName": "cordSubscriber-1", 
             "id": 1, 
             "service_specific_id": "123", 
-            "vlan_id": "432", 
-            "s_tag": "222", 
-            "c_tag": "432", 
-            "vcpe_id": 4, 
-            "instance": 1, 
-            "instance_name": "mysite_vcpe", 
-            "image": 1, 
-            "image_name": "trusty-server-multi-nic", 
-            "firewall_enable": false, 
-            "firewall_rules": "accept all anywhere anywhere", 
-            "url_filter_enable": false, 
-            "url_filter_rules": "allow all", 
-            "url_filter_level": "R", 
-            "bbs_account": null, 
-            "ssh_command": null, 
-            "vcpe_synced": false, 
-            "cdn_enable": false, 
-            "vbng_id": 5, 
-            "routeable_subnet": "", 
-            "nat_ip": null, 
-            "lan_ip": null, 
-            "wan_ip": null, 
-            "private_ip": null, 
-            "wan_mac": null, 
-            "wan_container_ip": null, 
-            "uplink_speed": 1000000000, 
-            "downlink_speed": 1000000000, 
-            "status": "enabled", 
-            "enable_uverse": true
+            "features": {
+                "cdn": false, 
+                "uplink_speed": 1000000000, 
+                "downlink_speed": 1000000000, 
+                "uverse": true, 
+                "status": "enabled"
+            }
         }
 
 ### Delete a Subscriber [DELETE]
 
 + Response 204
+
+## Subscriber features [/api/tenant/cord/subscriber/{subscriber_id}/features/]
+
++ Parameters
+    + subscriber_id (number) - ID of the Subscriber in the form of an integer
+
+### View a Subscriber Features Detail [GET]
+
++ Response 200 (application/json)
+
+        {
+            "cdn": false, 
+            "uplink_speed": 1000000000, 
+            "downlink_speed": 1000000000, 
+            "uverse": true, 
+            "status": "enabled"
+        }
+
+### Subscriber features uplink_speed [/api/tenant/cord/subscriber/{subscriber_id}/features/uplink_speed]
+
+#### Read Subscriber uplink_speed [GET]
+
++ Response 200 (application/json)
+
+        {
+            "uplink_speed": 1000000000
+        }
+
+#### Update Subscriber uplink_speed [POST]
+
++ Request 200 (application/json)
+
+        {
+            "uplink_speed": 1000000000
+        }
+
++ Response 200 (application/json)
+
+        {
+            "uplink_speed": 1000000000
+        }
