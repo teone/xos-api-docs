@@ -3,8 +3,8 @@ custom:
   apiaryApiKey: f941658c6714ebf58eeda5e0786e937f
   apiaryApiName: xos
 dry-run: null
-hookfiles: "./hooks.js"
-language: nodejs
+hookfiles: "./hooks.py"
+language: python
 sandbox: false
 server: null
 server-wait: 3
@@ -32,4 +32,4 @@ hooks-worker-term-retry: 500
 hooks-worker-handler-host: localhost
 hooks-worker-handler-port: 61321
 blueprint: apiary.apib
-endpoint: 'http://localhost:3000'
+endpoint: 'http://xos.dev:9999'
