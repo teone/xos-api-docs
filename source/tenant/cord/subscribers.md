@@ -27,10 +27,10 @@ Resource related to the CORD Subscribers.
             }
         ]
 
-## Subscriber Detail [/api/tenant/cord/subscriber/{subscriber_id}]
+## Subscriber Detail [/api/tenant/cord/subscriber/{subscriber_id}/]
 
 + Parameters
-    + subscriber_id (number) - ID of the Subscriber in the form of an integer
+    + subscriber_id: 1 (number) - ID of the Subscriber in the form of an integer
 
 ### View a Subscriber Detail [GET]
 
@@ -56,7 +56,7 @@ Resource related to the CORD Subscribers.
 ## Subscriber features [/api/tenant/cord/subscriber/{subscriber_id}/features/]
 
 + Parameters
-    + subscriber_id (number) - ID of the Subscriber in the form of an integer
+    + subscriber_id: 1 (number) - ID of the Subscriber in the form of an integer
 
 ### View a Subscriber Features Detail [GET]
 
@@ -70,10 +70,10 @@ Resource related to the CORD Subscribers.
             "status": "enabled"
         }
 
-### Subscriber features uplink_speed [/api/tenant/cord/subscriber/{subscriber_id}/features/uplink_speed]
+### Subscriber features uplink_speed [/api/tenant/cord/subscriber/{subscriber_id}/features/uplink_speed/]
 
 + Parameters
-    + subscriber_id (number) - ID of the Subscriber in the form of an integer
+    + subscriber_id: 1 (number) - ID of the Subscriber in the form of an integer
 
 #### Read Subscriber uplink_speed [GET]
 
