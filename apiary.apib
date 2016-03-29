@@ -14,15 +14,27 @@ Resource related to the CORD Subscribers.
 
         [
             {
-                "humanReadableName": "cordSubscriber-1", 
-                "id": 1, 
-                "service_specific_id": "123", 
+                "humanReadableName": "cordSubscriber-1",
+                "id": 1,
+                "service_specific_id": "123",
                 "features": {
-                    "cdn": false, 
-                    "uplink_speed": 1000000000, 
-                    "downlink_speed": 1000000000, 
-                    "uverse": true, 
+                    "cdn": false,
+                    "uplink_speed": 1000000000,
+                    "downlink_speed": 1000000000,
+                    "uverse": true,
                     "status": "enabled"
+                },
+                "identity": {
+                    "account_num": "123"
+                },
+                "related": {
+                    "instance_name": "mysite_vcpe",
+                    "vsg_id": 4,
+                    "c_tag": "432",
+                    "instance_id": 1,
+                    "wan_container_ip": null,
+                    "volt_id": 3,
+                    "s_tag": "222"
                 }
             }
         ]
@@ -40,13 +52,25 @@ Resource related to the CORD Subscribers.
             "humanReadableName": "cordSubscriber-1", 
             "id": 1, 
             "service_specific_id": "123", 
-            "features": {
+            "features": { 
                 "cdn": false, 
                 "uplink_speed": 1000000000, 
                 "downlink_speed": 1000000000, 
                 "uverse": true, 
-                "status": "enabled"
-            }
+                "status": "enabled" 
+            }, 
+            "identity": { 
+                "account_num": "123" 
+            }, 
+            "related": { 
+                "instance_name": "mysite_vcpe", 
+                "vsg_id": 4, 
+                "c_tag": "432", 
+                "instance_id": 1, 
+                "wan_container_ip": null, 
+                "volt_id": 3, 
+                "s_tag": "222" 
+            } 
         }
 
 ### Delete a Subscriber [DELETE]
@@ -85,8 +109,6 @@ Resource related to the CORD Subscribers.
 
 #### Update Subscriber uplink_speed [PUT]
 
-This request will set the uplink_speed to a new value for the designated subscriber
-
 + Request 200 (application/json)
 
         {
@@ -97,4 +119,31 @@ This request will set the uplink_speed to a new value for the designated subscri
 
         {
             "uplink_speed": 1000000000
+        }
+
+### Subscriber features downlink_speed [/api/tenant/cord/subscriber/{subscriber_id}/features/downlink_speed/]
+
++ Parameters
+    + subscriber_id: 1 (number) - ID of the Subscriber in the form of an integer
+
+#### Read Subscriber downlink_speed [GET]
+
++ Response 200 (application/json)
+
+        {
+            "downlink_speed": 1000000000
+        }
+
+#### Update Subscriber downlink_speed [PUT]
+
++ Request 200 (application/json)
+
+        {
+            "downlink_speed": 1000000000
+        }
+
++ Response 200 (application/json)
+
+        {
+            "downlink_speed": 1000000000
         }
