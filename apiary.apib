@@ -147,3 +147,84 @@ Resource related to the CORD Subscribers.
         {
             "downlink_speed": 1000000000
         }
+
+### Subscriber features cdn [/api/tenant/cord/subscriber/{subscriber_id}/features/cdn/]
+
++ Parameters
+    + subscriber_id: 1 (number) - ID of the Subscriber in the form of an integer
+
+#### Read Subscriber cdn [GET]
+
++ Response 200 (application/json)
+
+        {
+            "cdn": false
+        }
+
+#### Update Subscriber cdn [PUT]
+
++ Request 200 (application/json)
+
+        {
+            "cdn": false
+        }
+
++ Response 200 (application/json)
+
+        {
+            "cdn": false
+        }
+
+### Subscriber features uverse [/api/tenant/cord/subscriber/{subscriber_id}/features/uverse/]
+
++ Parameters
+    + subscriber_id: 1 (number) - ID of the Subscriber in the form of an integer
+
+#### Read Subscriber uverse [GET]
+
++ Response 200 (application/json)
+
+        {
+            "uverse": false
+        }
+
+#### Update Subscriber uverse [PUT]
+
++ Request 200 (application/json)
+
+        {
+            "uverse": false
+        }
+
++ Response 200 (application/json)
+
+        {
+            "uverse": false
+        }
+
+### Subscriber features status [/api/tenant/cord/subscriber/{subscriber_id}/features/status/]
+
++ Parameters
+    + subscriber_id: 1 (number) - ID of the Subscriber in the form of an integer
+
+#### Read Subscriber status [GET]
+
++ Response 200 (application/json)
+
+        {
+            "status": "enabled"
+        }
+
+#### Update Subscriber status [PUT]
+
++ Request 200 (application/json)
+
+        {
+            "status": "enabled"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "status": "enabled"
+        }
