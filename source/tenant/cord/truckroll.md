@@ -50,3 +50,5 @@ Virtual Truckroll, enable to perform basic test on user connectivity such as pin
             "is_synced": false,
             "backend_status": "0 - Provisioning in progress"
         }
+
+
