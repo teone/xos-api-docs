@@ -8,7 +8,10 @@ gulp.task('default', function() {
 });
 
 gulp.task('concat', function() {
-  return gulp.src('./source/**/*.md')
+  return gulp.src([
+      './source/base.md',
+      './source/**/*.md'
+    ])
     .pipe(concat('apiary.apib', {newLine: '\n \n \n'}))
     .pipe(gulp.dest('./'));
 });

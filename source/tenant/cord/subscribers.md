@@ -1,7 +1,3 @@
-FORMAT: 1A
-
-# XOS
-
 # Group Subscribers
 
 Resource related to the CORD Subscribers.
