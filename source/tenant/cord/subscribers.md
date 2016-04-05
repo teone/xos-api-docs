@@ -16,20 +16,21 @@ Resource related to the CORD Subscribers.
             {
                 "humanReadableName": "cordSubscriber-1",
                 "id": 1,
-                "service_specific_id": "123",
                 "features": {
                     "cdn": false,
                     "uplink_speed": 1000000000,
                     "downlink_speed": 1000000000,
-                    "uverse": true,
+                    "uverse": false,
                     "status": "enabled"
                 },
                 "identity": {
-                    "account_num": "123"
+                    "account_num": "123",
+                    "name": "My House"
                 },
                 "related": {
                     "instance_name": "mysite_vcpe",
                     "vsg_id": 4,
+                    "compute_node_name": "node2.opencloud.us",
                     "c_tag": "432",
                     "instance_id": 1,
                     "wan_container_ip": null,
@@ -51,20 +52,21 @@ Resource related to the CORD Subscribers.
         {
             "humanReadableName": "cordSubscriber-1", 
             "id": 1, 
-            "service_specific_id": "123", 
             "features": { 
                 "cdn": false, 
                 "uplink_speed": 1000000000, 
                 "downlink_speed": 1000000000, 
-                "uverse": true, 
+                "uverse": false, 
                 "status": "enabled" 
             }, 
             "identity": { 
-                "account_num": "123" 
+                "account_num": "123",
+                "name": "My House"
             }, 
             "related": { 
                 "instance_name": "mysite_vcpe", 
                 "vsg_id": 4, 
+                "compute_node_name": "node2.opencloud.us",
                 "c_tag": "432", 
                 "instance_id": 1, 
                 "wan_container_ip": null, 

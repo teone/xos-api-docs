@@ -4,6 +4,7 @@
   "description": "Api documentation for XOS",
   "main": "index.js",
   "scripts": {
+    "start": "gulp",
     "test": "dredd",
     "dry": "dredd --dry-run"
   },
