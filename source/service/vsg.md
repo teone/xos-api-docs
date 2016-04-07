@@ -1,6 +1,6 @@
 # Group vSG
 
-## vSG Collection [/api/tenant/onos/app/]
+## vSG Collection [/api/service/vsg/]
 
 ### List all vSGs [GET]
 
