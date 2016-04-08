@@ -11,7 +11,16 @@ import django
 from core.models import *
 from services.cord.models import *
 from services.vtr.models import *
+import urllib2
+import json
 django.setup()
+
+
+def doLogin(username, password):
+    url = "http://127.0.0.1:8000/xoslib/login?username=%s&password=%s" % (username, password)
+    res = urllib2.urlopen(url).read()
+    parsed = json.loads(res)
+    return {'token': parsed['xoscsrftoken'], 'sessionid': parsed['xossessionid']}
 
 
 def cleanDB():
@@ -41,6 +50,8 @@ def cleanDB():
 
     for s in NetworkSlice.objects.all():
         s.delete(purge=True)
+
+    print 'DB Cleaned'
 
 
 def createTestSubscriber():
@@ -90,7 +101,7 @@ def createTestSubscriber():
     vcpe_slice.caller = user
     vcpe_slice.save()
 
-    # print 'vcpe_slice created'
+    print 'vcpe_slice created'
 
     # create a lan network
     lan_net = Network()
@@ -99,7 +110,7 @@ def createTestSubscriber():
     lan_net.template = private_template
     lan_net.save()
 
-    # print 'lan_network created'
+    print 'lan_network created'
 
     # add relation between vcpe slice and lan network
     vcpe_network = NetworkSlice()
@@ -107,12 +118,14 @@ def createTestSubscriber():
     vcpe_network.slice = vcpe_slice
     vcpe_network.save()
 
-    # print 'vcpe network relation added'
+    print 'vcpe network relation added'
 
     # vbng service
     vbng_service = VBNGService()
     vbng_service.name = 'service_vbng'
     vbng_service.save()
+
+    print 'vbng_service creater'
 
     # volt tenant
     vt = VOLTTenant(subscriber=subscriber.id, id=1)
@@ -122,7 +135,7 @@ def createTestSubscriber():
     vt.caller = user
     vt.save()
 
-    # print "Subscriber Created"
+    print "Subscriber Created"
 
 
 def deleteTruckrolls():
@@ -142,8 +155,18 @@ def createTruckroll():
     tn.save()
 
 
+@hooks.before_all
+def my_before_all_hook(transactions):
+    print "-------------------------------- Before All Hook --------------------------------"
+    cleanDB()
+
+
 @hooks.before_each
 def my_before_each_hook(transaction):
+    print "-------------------------------- Before Each Hook --------------------------------"
+    auth = doLogin('padmin@vicci.org', 'letmein')
+    transaction['request']['headers']['X-CSRFToken'] = auth['token']
+    transaction['request']['headers']['Cookie'] = "xossessionid=%s; xoscsrftoken=%s" % (auth['sessionid'], auth['token'])
     createTestSubscriber()
     sys.stdout.flush()
 
@@ -167,5 +190,5 @@ def test3(transaction):
 
 @hooks.before("vOLT > vOLT Collection > Create a vOLT")
 def test4(transaction):
-    transaction['skip'] = True
-    # VOLTTenant.objects.get(kind='vOLT').delete()
+    # transaction['skip'] = True
+    VOLTTenant.objects.get(kind='vOLT').delete()

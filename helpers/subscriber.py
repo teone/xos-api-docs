@@ -1,14 +1,35 @@
-# NOT used, see https://github.com/apiaryio/dredd-hooks-python/issues/17#issuecomment-206950166
+import dredd_hooks as hooks
+import sys
 
+# HELPERS
+# NOTE move in separated module
 import os
 import sys
 sys.path.append("/opt/xos")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "xos.settings")
 import django
 from core.models import *
-#from hpc.models import *
 from services.cord.models import *
+from services.vtr.models import *
+from django.contrib.auth import authenticate, login
+from django.core.exceptions import PermissionDenied
+from django.contrib.sessions.models import Session
+import urllib2
+import json
 django.setup()
+
+token = ''
+
+
+def doLogin(username, password):
+
+    url = "http://127.0.0.1:8000/xoslib/login?username=%s&password=%s" % (username, password)
+
+    print url
+
+    res = urllib2.urlopen(url).read()
+
+    token = json.loads(res)['xoscsrftoken']
 
 
 def cleanDB():
@@ -38,6 +59,8 @@ def cleanDB():
 
     for s in NetworkSlice.objects.all():
         s.delete(purge=True)
+
+    print 'DB Cleaned'
 
 
 def createTestSubscriber():
@@ -111,6 +134,8 @@ def createTestSubscriber():
     vbng_service.name = 'service_vbng'
     vbng_service.save()
 
+    print 'vbng_service creater'
+
     # volt tenant
     vt = VOLTTenant(subscriber=subscriber.id, id=1)
     vt.s_tag = "222"
@@ -120,5 +145,23 @@ def createTestSubscriber():
     vt.save()
 
     print "Subscriber Created"
+
+
+def deleteTruckrolls():
+    for s in VTRTenant.objects.all():
+        s.delete(purge=True)
+
+
+def setUpTruckroll():
+    service_vtr = VTRService()
+    service_vtr.name = 'service_vtr'
+    service_vtr.save()
+
+
+def createTruckroll():
+    setUpTruckroll()
+    tn = VTRTenant(id=1)
+    tn.save()
+
 
 createTestSubscriber()
