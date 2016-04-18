@@ -11,16 +11,25 @@ import django
 from core.models import *
 from services.cord.models import *
 from services.vtr.models import *
+from django.contrib.auth import authenticate, login
+from django.core.exceptions import PermissionDenied
+from django.contrib.sessions.models import Session
 import urllib2
 import json
 django.setup()
 
+token = ''
+
 
 def doLogin(username, password):
+
     url = "http://127.0.0.1:8000/xoslib/login?username=%s&password=%s" % (username, password)
+
+    print url
+
     res = urllib2.urlopen(url).read()
-    parsed = json.loads(res)
-    return {'token': parsed['xoscsrftoken'], 'sessionid': parsed['xossessionid']}
+
+    token = json.loads(res)['xoscsrftoken']
 
 
 def cleanDB():
@@ -51,10 +60,7 @@ def cleanDB():
     for s in NetworkSlice.objects.all():
         s.delete(purge=True)
 
-    for s in AddressPool.objects.all():
-        s.delete(purge=True)
-
-    # print 'DB Cleaned'
+    print 'DB Cleaned'
 
 
 def createTestSubscriber():
@@ -73,22 +79,6 @@ def createTestSubscriber():
     subscriber = CordSubscriberRoot(name='Test Subscriber 1', id=1)
     subscriber.save()
 
-    # vRouter service
-    vrouter_service = VRouterService()
-    vrouter_service.name = 'service_vrouter'
-    vrouter_service.save()
-
-    # address pools
-    ap_vsg = AddressPool()
-    ap_vsg.service = vrouter_service
-    ap_vsg.name = 'addresses_vsg'
-    ap_vsg.addresses = '10.168.0.0'
-    ap_vsg.gateway_ip = '10.168.0.1'
-    ap_vsg.gateway_mac = '02:42:0a:a8:00:01'
-    ap_vsg.save()
-
-    # print 'vRouter created'
-
     # Site
     site = Site.objects.get(name='MySite')
 
@@ -103,7 +93,6 @@ def createTestSubscriber():
     vsg_slice.site = site
     vsg_slice.caller = user
 
-<<<<<<< HEAD
     vsg_slice.save()
 
     vsg_service.save()
@@ -121,7 +110,7 @@ def createTestSubscriber():
     vcpe_slice.caller = user
     vcpe_slice.save()
 
-    # print 'vcpe_slice created'
+    print 'vcpe_slice created'
 
     # create a lan network
     lan_net = Network()
@@ -130,7 +119,7 @@ def createTestSubscriber():
     lan_net.template = private_template
     lan_net.save()
 
-    # print 'lan_network created'
+    print 'lan_network created'
 
     # add relation between vcpe slice and lan network
     vcpe_network = NetworkSlice()
@@ -138,14 +127,14 @@ def createTestSubscriber():
     vcpe_network.slice = vcpe_slice
     vcpe_network.save()
 
-    # print 'vcpe network relation added'
+    print 'vcpe network relation added'
 
     # vbng service
     vbng_service = VBNGService()
     vbng_service.name = 'service_vbng'
     vbng_service.save()
 
-    # print 'vbng_service creater'
+    print 'vbng_service creater'
 
     # volt tenant
     vt = VOLTTenant(subscriber=subscriber.id, id=1)
@@ -155,7 +144,7 @@ def createTestSubscriber():
     vt.caller = user
     vt.save()
 
-    # print "Subscriber Created"
+    print "Subscriber Created"
 
 
 def deleteTruckrolls():
@@ -175,58 +164,4 @@ def createTruckroll():
     tn.save()
 
 
-@hooks.before_all
-def my_before_all_hook(transactions):
-    # print "-------------------------------- Before All Hook --------------------------------"
-=======
-@hooks.before_all
-def my_before_all_hook(transactions):
-    print "-------------------------------- Before All Hook --------------------------------"
->>>>>>> 4523dc840d17b426f3e8a6be9ab0d7bd5ed65374
-    cleanDB()
-
-
-@hooks.before_each
-def my_before_each_hook(transaction):
-<<<<<<< HEAD
-    # print "-------------------------------- Before Each Hook --------------------------------"
-    # print transaction['name']
-=======
-    print "-------------------------------- Before Each Hook --------------------------------"
->>>>>>> 4523dc840d17b426f3e8a6be9ab0d7bd5ed65374
-    auth = doLogin('padmin@vicci.org', 'letmein')
-    transaction['request']['headers']['X-CSRFToken'] = auth['token']
-    transaction['request']['headers']['Cookie'] = "xossessionid=%s; xoscsrftoken=%s" % (auth['sessionid'], auth['token'])
-    createTestSubscriber()
-    sys.stdout.flush()
-
-
-@hooks.before("Truckroll > Truckroll Collection > Create a Truckroll")
-def test1(transaction):
-    setUpTruckroll()
-
-
-@hooks.before("Truckroll > Truckroll Detail > View a Truckroll Detail")
-def test2(transaction):
-    deleteTruckrolls()
-    createTruckroll()
-
-
-@hooks.before("Truckroll > Truckroll Detail > Delete a Truckroll Detail")
-def test3(transaction):
-    deleteTruckrolls()
-    createTruckroll()
-
-
-@hooks.before("vOLT > vOLT Collection > Create a vOLT")
-def test4(transaction):
-    # transaction['skip'] = True
-    VOLTTenant.objects.get(kind='vOLT').delete()
-<<<<<<< HEAD
-
-
-@hooks.before("Example > Example Services Collection > List all Example Services")
-def exampleTest(transaction):
-    transaction['skip'] = True
-=======
->>>>>>> 4523dc840d17b426f3e8a6be9ab0d7bd5ed65374
+createTestSubscriber()
