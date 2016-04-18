@@ -10,8 +10,8 @@ OLT devices aggregate a set of subscriber connections
 
         [
             {
-                "humanReadableName": "vOLT-tenant-3",
-                "id": 3,
+                "humanReadableName": "vOLT-tenant-1",
+                "id": 1,
                 "service_specific_id": "123",
                 "s_tag": "222",
                 "c_tag": "432",
@@ -28,18 +28,18 @@ OLT devices aggregate a set of subscriber connections
 
 ### Create a vOLT [POST]
 
-+ Request 200 (application/json)
++ Request (application/json)
 
         {
             "s_tag": "222",
             "c_tag": "432",
-            "subscriber": "1"
+            "subscriber": 1
         }
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         {
-                "humanReadableName": "vOLT-tenant-3",
+                "humanReadableName": "vOLT-tenant-1",
                 "id": 1,
                 "service_specific_id": "123",
                 "s_tag": "222",
@@ -59,15 +59,15 @@ OLT devices aggregate a set of subscriber connections
 A virtual volt is complete once is_synced equal true
 
 + Parameters
-    + volt_id: 3 (number) - ID of the vOLT in the form of an integer
+    + volt_id: 1 (number) - ID of the vOLT in the form of an integer
 
 ### View a vOLT Detail [GET]
 
 + Response 200 (application/json)
 
         {
-            "humanReadableName": "vOLT-tenant-3",
-            "id": 3,
+            "humanReadableName": "vOLT-tenant-1",
+            "id": 1,
             "service_specific_id": "123",
             "s_tag": "222",
             "c_tag": "432",

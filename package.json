@@ -18,11 +18,11 @@
     "url": "https://github.com/teone/xos-api-docs/issues"
   },
   "homepage": "https://github.com/teone/xos-api-docs#readme",
+  "dependencies": {
+    "dredd": "^1.0.8"
+  },
   "devDependencies": {
-    "dredd": "^1.0.8",
     "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.0",
-    "shelljs": "^0.6.0",
-    "ssh-exec": "^2.0.0"
+    "gulp-concat": "^2.6.0"
   }
 }
